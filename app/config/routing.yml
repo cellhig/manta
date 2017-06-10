@@ -1,0 +1,7 @@
+manta_facturation:
+    resource: "@MantaFacturationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

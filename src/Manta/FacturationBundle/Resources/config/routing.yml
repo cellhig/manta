@@ -1,0 +1,3 @@
+manta_facturation_homepage:
+    path:     /
+    defaults: { _controller: MantaFacturationBundle:Default:index }
