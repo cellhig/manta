@@ -56,11 +56,24 @@ class Cliente
      */
     private $email;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Factura", mappedBy="facturaId")
+     */
+    protected $facturasPorCliente;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->facturasPorCliente = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -186,5 +199,38 @@ class Cliente
     {
         return $this->email;
     }
-}
 
+    /**
+     * Add facturasPorCliente
+     *
+     * @param \Manta\FacturationBundle\Entity\Factura $facturasPorCliente
+     *
+     * @return Cliente
+     */
+    public function addFacturasPorCliente(\Manta\FacturationBundle\Entity\Factura $facturasPorCliente)
+    {
+        $this->facturasPorCliente[] = $facturasPorCliente;
+
+        return $this;
+    }
+
+    /**
+     * Remove facturasPorCliente
+     *
+     * @param \Manta\FacturationBundle\Entity\Factura $facturasPorCliente
+     */
+    public function removeFacturasPorCliente(\Manta\FacturationBundle\Entity\Factura $facturasPorCliente)
+    {
+        $this->facturasPorCliente->removeElement($facturasPorCliente);
+    }
+
+    /**
+     * Get facturasPorCliente
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFacturasPorCliente()
+    {
+        return $this->facturasPorCliente;
+    }
+}

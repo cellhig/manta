@@ -43,17 +43,30 @@ class Producto
     private $stock;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="categoria_id", type="integer")
+     * @var Categoria @ORM\ManyToOne(targetEntity="Manta\FacturationBundle\Entity\Categoria", inversedBy="productosPorCategoria")
+     * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id", onDelete="NO ACTION")
      */
     private $categoriaId;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Detalle", mappedBy="productoId")
+     */
+    protected $detallePorProductos;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->detallePorProductos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -125,7 +138,7 @@ class Producto
     /**
      * Get stock
      *
-     * @return int
+     * @return integer
      */
     public function getStock()
     {
@@ -135,11 +148,11 @@ class Producto
     /**
      * Set categoriaId
      *
-     * @param integer $categoriaId
+     * @param \Manta\FacturationBundle\Entity\Categoria $categoriaId
      *
      * @return Producto
      */
-    public function setCategoriaId($categoriaId)
+    public function setCategoriaId(\Manta\FacturationBundle\Entity\Categoria $categoriaId = null)
     {
         $this->categoriaId = $categoriaId;
 
@@ -149,11 +162,44 @@ class Producto
     /**
      * Get categoriaId
      *
-     * @return int
+     * @return \Manta\FacturationBundle\Entity\Categoria
      */
     public function getCategoriaId()
     {
         return $this->categoriaId;
     }
-}
 
+    /**
+     * Add detallePorProducto
+     *
+     * @param \Manta\FacturationBundle\Entity\Detalle $detallePorProducto
+     *
+     * @return Producto
+     */
+    public function addDetallePorProducto(\Manta\FacturationBundle\Entity\Detalle $detallePorProducto)
+    {
+        $this->detallePorProductos[] = $detallePorProducto;
+
+        return $this;
+    }
+
+    /**
+     * Remove detallePorProducto
+     *
+     * @param \Manta\FacturationBundle\Entity\Detalle $detallePorProducto
+     */
+    public function removeDetallePorProducto(\Manta\FacturationBundle\Entity\Detalle $detallePorProducto)
+    {
+        $this->detallePorProductos->removeElement($detallePorProducto);
+    }
+
+    /**
+     * Get detallePorProductos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetallePorProductos()
+    {
+        return $this->detallePorProductos;
+    }
+}

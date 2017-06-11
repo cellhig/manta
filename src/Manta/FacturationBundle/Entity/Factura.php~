@@ -1,0 +1,44 @@
+<?php
+
+namespace Manta\FacturationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Factura
+ *
+ * @ORM\Table(name="factura")
+ * @ORM\Entity(repositoryClass="Manta\FacturationBundle\Repository\FacturaRepository")
+ */
+class Factura
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime")
+     */
+    private $fecha;
+
+    /**
+     *
+     * @var Cliente @ORM\ManyToOne(targetEntity="Manta\FacturationBundle\Entity\Cliente", inversedBy="facturasPorCliente")
+     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id", onDelete="NO ACTION")
+     */
+    private $clienteId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Detalle", mappedBy="facturaId")
+     */
+    protected $detallePorFactura;
+
+}
+

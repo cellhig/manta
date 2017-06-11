@@ -1,0 +1,66 @@
+<?php
+
+namespace Manta\FacturationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cliente
+ *
+ * @ORM\Table(name="cliente")
+ * @ORM\Entity(repositoryClass="Manta\FacturationBundle\Repository\ClienteRepository")
+ */
+class Cliente
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=120)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=120)
+     */
+    private $apellido;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=255)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Factura", mappedBy="facturaId")
+     */
+    protected $facturasPorCliente;
+
+
+}
+

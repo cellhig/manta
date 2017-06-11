@@ -29,17 +29,29 @@ class Factura
     private $fecha;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="cliente_id", type="integer")
+     * @var Cliente @ORM\ManyToOne(targetEntity="Manta\FacturationBundle\Entity\Cliente", inversedBy="facturasPorCliente")
+     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id", onDelete="NO ACTION")
      */
     private $clienteId;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Detalle", mappedBy="facturaId")
+     */
+    protected $detallePorFactura;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->detallePorFactura = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -73,11 +85,11 @@ class Factura
     /**
      * Set clienteId
      *
-     * @param integer $clienteId
+     * @param \Manta\FacturationBundle\Entity\Cliente $clienteId
      *
      * @return Factura
      */
-    public function setClienteId($clienteId)
+    public function setClienteId(\Manta\FacturationBundle\Entity\Cliente $clienteId = null)
     {
         $this->clienteId = $clienteId;
 
@@ -87,11 +99,44 @@ class Factura
     /**
      * Get clienteId
      *
-     * @return int
+     * @return \Manta\FacturationBundle\Entity\Cliente
      */
     public function getClienteId()
     {
         return $this->clienteId;
     }
-}
 
+    /**
+     * Add detallePorFactura
+     *
+     * @param \Manta\FacturationBundle\Entity\Detalle $detallePorFactura
+     *
+     * @return Factura
+     */
+    public function addDetallePorFactura(\Manta\FacturationBundle\Entity\Detalle $detallePorFactura)
+    {
+        $this->detallePorFactura[] = $detallePorFactura;
+
+        return $this;
+    }
+
+    /**
+     * Remove detallePorFactura
+     *
+     * @param \Manta\FacturationBundle\Entity\Detalle $detallePorFactura
+     */
+    public function removeDetallePorFactura(\Manta\FacturationBundle\Entity\Detalle $detallePorFactura)
+    {
+        $this->detallePorFactura->removeElement($detallePorFactura);
+    }
+
+    /**
+     * Get detallePorFactura
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetallePorFactura()
+    {
+        return $this->detallePorFactura;
+    }
+}

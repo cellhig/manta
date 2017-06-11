@@ -36,16 +36,16 @@ class Detalle
     private $precio;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="producto_id", type="integer")
+     * @var Producto @ORM\ManyToOne(targetEntity="Manta\FacturationBundle\Entity\Producto", inversedBy="detallePorProductos")
+     * @ORM\JoinColumn(name="producto_id", referencedColumnName="id", onDelete="NO ACTION")
      */
     private $productoId;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="factura_id", type="integer")
+     * @var Factura @ORM\ManyToOne(targetEntity="Manta\FacturationBundle\Entity\Factura", inversedBy="detallePorFactura")
+     * @ORM\JoinColumn(name="factura_id", referencedColumnName="id", onDelete="NO ACTION")
      */
     private $facturaId;
 
@@ -53,7 +53,7 @@ class Detalle
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class Detalle
     /**
      * Get cantidad
      *
-     * @return int
+     * @return integer
      */
     public function getCantidad()
     {
@@ -111,11 +111,11 @@ class Detalle
     /**
      * Set productoId
      *
-     * @param integer $productoId
+     * @param \Manta\FacturationBundle\Entity\Producto $productoId
      *
      * @return Detalle
      */
-    public function setProductoId($productoId)
+    public function setProductoId(\Manta\FacturationBundle\Entity\Producto $productoId = null)
     {
         $this->productoId = $productoId;
 
@@ -125,7 +125,7 @@ class Detalle
     /**
      * Get productoId
      *
-     * @return int
+     * @return \Manta\FacturationBundle\Entity\Producto
      */
     public function getProductoId()
     {
@@ -135,11 +135,11 @@ class Detalle
     /**
      * Set facturaId
      *
-     * @param integer $facturaId
+     * @param \Manta\FacturationBundle\Entity\Factura $facturaId
      *
      * @return Detalle
      */
-    public function setFacturaId($facturaId)
+    public function setFacturaId(\Manta\FacturationBundle\Entity\Factura $facturaId = null)
     {
         $this->facturaId = $facturaId;
 
@@ -149,11 +149,10 @@ class Detalle
     /**
      * Get facturaId
      *
-     * @return int
+     * @return \Manta\FacturationBundle\Entity\Factura
      */
     public function getFacturaId()
     {
         return $this->facturaId;
     }
 }
-

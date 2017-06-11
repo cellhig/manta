@@ -35,11 +35,24 @@ class Categoria
      */
     private $descripcion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="categoriaId")
+     */
+    protected $productosPorCategoria;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->productosPorCategoria = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -93,5 +106,38 @@ class Categoria
     {
         return $this->descripcion;
     }
-}
 
+    /**
+     * Add productosPorCategorium
+     *
+     * @param \Manta\FacturationBundle\Entity\Producto $productosPorCategorium
+     *
+     * @return Categoria
+     */
+    public function addProductosPorCategorium(\Manta\FacturationBundle\Entity\Producto $productosPorCategorium)
+    {
+        $this->productosPorCategoria[] = $productosPorCategorium;
+
+        return $this;
+    }
+
+    /**
+     * Remove productosPorCategorium
+     *
+     * @param \Manta\FacturationBundle\Entity\Producto $productosPorCategorium
+     */
+    public function removeProductosPorCategorium(\Manta\FacturationBundle\Entity\Producto $productosPorCategorium)
+    {
+        $this->productosPorCategoria->removeElement($productosPorCategorium);
+    }
+
+    /**
+     * Get productosPorCategoria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductosPorCategoria()
+    {
+        return $this->productosPorCategoria;
+    }
+}
