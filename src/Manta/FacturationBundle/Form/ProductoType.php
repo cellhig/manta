@@ -13,20 +13,18 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProductoType extends AbstractType
 {
-
-
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')
-            ->add('precio')
-            ->add('stock')
+        $builder->add('nombre',null, array( 'required' => true))
+            ->add('precio',null, array( 'required' => true))
+            ->add('stock',null, array( 'required' => true, 'attr' => array('min' => '1', 'max' => '100000000')))
             ->add('categoriaId', EntityType::class, array(
                 'class' => 'MantaFacturationBundle:Categoria',
-                'choice_label' => 'nombre'
+                'choice_label' => 'nombre',
+                'label' => 'Categoría'
             ));
     }
     
@@ -47,6 +45,4 @@ class ProductoType extends AbstractType
     {
         return 'manta_facturationbundle_producto';
     }
-
-
 }
