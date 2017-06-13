@@ -34,10 +34,14 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
     <ul>
         <li>
             <a href="{{ path('producto_new') }}">Registrar nuevo producto</a>
         </li>
     </ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/mantafacturation/jsControllers/facturation.js') }}"></script>
 {% endblock %}

@@ -1,3 +1,7 @@
+manta_facturation_detalle:
+    resource: "@MantaFacturationBundle/Controller/DetalleController.php"
+    type:     annotation
+
 manta_facturation_factura:
     resource: "@MantaFacturationBundle/Controller/FacturaController.php"
     type:     annotation
