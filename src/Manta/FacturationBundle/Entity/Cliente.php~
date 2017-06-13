@@ -38,6 +38,13 @@ class Cliente
     /**
      * @var string
      *
+     * @ORM\Column(name="identificacion", type="string", length=20)
+     */
+    private $identificacion;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="direccion", type="string", length=255)
      */
     private $direccion;
@@ -62,5 +69,5 @@ class Cliente
     protected $facturasPorCliente;
 
 
-}
 
+}

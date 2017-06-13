@@ -38,6 +38,13 @@ class Cliente
     /**
      * @var string
      *
+     * @ORM\Column(name="identificacion", type="string", length=20)
+     */
+    private $identificacion;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="direccion", type="string", length=255)
      */
     private $direccion;
@@ -126,6 +133,30 @@ class Cliente
     public function getApellido()
     {
         return $this->apellido;
+    }
+
+    /**
+     * Set identificacion
+     *
+     * @param string $identificacion
+     *
+     * @return Cliente
+     */
+    public function setIdentificacion($identificacion)
+    {
+        $this->identificacion = $identificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get identificacion
+     *
+     * @return string
+     */
+    public function getIdentificacion()
+    {
+        return $this->identificacion;
     }
 
     /**
